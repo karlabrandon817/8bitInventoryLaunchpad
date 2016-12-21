@@ -8,5 +8,44 @@
   </head>
   <body>
     <h1>8-Bit Inventory Launchpad</h1>
+    <div>
+      <h2>Add Item to Inventory</h2>
+      <input type="text" id='addObject' placeholder="object name"/>
+      <select id='addColor'>
+      <option value='red'>Red</option>
+      <option value='orange'>Orange</option>
+      <option value='yellow'>Yellow</option>
+      <option value='green'>Green</option>
+      <option value='mermaid treasure'>Mermaid Treasure</option>
+      <option value='blue'>Blue</option>
+      <option value='purple'>Purple</option>
+    </select>
+      <select id='addSize'>
+        <option value='small'>Small</option>
+        <option value='medium'>Medium</option>
+        <option value='large'>Large</option>
+      </select>
+          <button type="button" name="button" id="addItemButton">Add to Inventory</button>
+    </div>
+    <div>
+      <h2>Search for Item</h2>
+      <input type="text" id='searchObject' placeholder="object name"/>
+      <select id='searchColor'>
+          <option value='red'>Red</option>
+          <option value='orange'>Orange</option>
+          <option value='yellow'>Yellow</option>
+          <option value='green'>Green</option>
+          <option value='mermaid treasure'>Mermaid Treasure</option>
+          <option value='blue'>Blue</option>
+          <option value='purple'>Purple</option>
+        </select>
+      <select id='searchSize'>
+        <option value='small'>Small</option>
+        <option value='medium'>Medium</option>
+        <option value='large'>Large</option>
+      </select>
+      <button type="button" name="button" id="searchButton">Search Inventory</button>
+      <p id='outputP'></p>
+    </div>
   </body>
 </html>

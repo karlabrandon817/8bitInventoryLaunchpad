@@ -2,8 +2,14 @@ var express = require( 'express' );
 var app = express();
 var path = require( 'path' );
 var bodyParser = require( 'body-parser' );
-var urlEncodedParser = bodyParser.urlencoded( { extended: false } );
+var urlEncodedParser = bodyParser.urlencoded( { extended: true } );
 var port = process.env.PORT || 3003;
+
+//connection string to database named "inventory"
+//table named "items" wtih columns "object_name", "color", "size"
+var connectionString = 'postgres://localhost:5432/inventory';
+
+app.use( express.static( 'public' ) );//static folder
 
 // spin up server
 app.listen( port, function(){
@@ -27,6 +33,3 @@ app.get( '/getInventory', function( req, res ){
   console.log( 'getInventory route hit' );
   // get all items in the table and return them to client
 }); // end addItem route
-
-// static folder
-app.use( express.static( 'public' ) );

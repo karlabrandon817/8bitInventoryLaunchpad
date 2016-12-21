@@ -6,13 +6,13 @@ var colors = [ 'red', 'orange', 'yellow', 'green', 'mermaid treasure', 'blue', '
 var items = [];
 
 $( document ).ready( function(){
-  var addObject = function( colorIn, nameIn, sizeIn ){
+  var addObject = function( addColor, addOjbect, addSize ){
     console.log( 'in addObject' );
     // assemble object from new fields
     var newItem = {
-      color: colorIn,
-      name: nameIn,
-      size: sizeIn
+      color: addColor,
+      name: addObject,
+      size: addSize
     }; // end testObject
     console.log( 'adding:', newItem );
     ////// TODO: add ajax call to addItem route to add this item to the table
@@ -20,12 +20,12 @@ $( document ).ready( function(){
     items.push( newItem );
   }; // end addObject
 
-  var findObject = function( colorCheck, sizeCheck ){
-    console.log( 'in findObject. Looking for:', colorCheck, sizeCheck );
+  var findObject = function( searchColor, searchSize ){
+    console.log( 'in findObject. Looking for:', searchColor, searchSize );
     // array of matches
     var matches = [];
     for ( var i = 0; i < items.length; i++ ) {
-      if( items[i].color == colorCheck && items[i].size == sizeCheck ){
+      if( items[i].color == searchColor && items[i].size == sizeCheck ){
         // match, add to array
         matches.push( items[i] );
       } // end if
@@ -44,7 +44,7 @@ $( document ).ready( function(){
   // get objects when doc is ready
   getObjects();
   // the below are tests to show what is returned when running findObject
-  addObject( 'blue', 'blueberry', 'small' )
+  addObject( 'blue', 'blueberry', 'small' );
   findObject( 'blue', 'small' );
   findObject( 'blue', 'large' );
 }); // end doc ready
