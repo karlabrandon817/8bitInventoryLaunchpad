@@ -2,10 +2,9 @@
 var sizes = [ 'small', 'medium', 'large' ];
 var colors = [ 'red', 'orange', 'yellow', 'green', 'mermaid treasure', 'blue', 'purple' ];
 
-////// global array of items in inventory //////
-var items = [];
+var items = [];//global array of items in the inventory
 
-$( document ).ready( function(){
+$(document).ready(function(){
 
   var addObject = function(){
     console.log( 'in addObject' );
@@ -27,9 +26,7 @@ $( document ).ready( function(){
           console.log('error with addItem ajax call...');
         }//end error function
     });//end ajax call in addObject
-    // add to items array
-    items.push( newItem );
-  }; // end addObject
+  }; // end addObject function
 
   var findObject = function( searchColor, searchSize ){
     console.log( 'in findObject. Looking for:', searchColor, searchSize );
@@ -43,14 +40,21 @@ $( document ).ready( function(){
     } // end for
     console.log( 'matches:', matches );
     ////// TODO: display matches
-  }; // end findObject
+  }; // end findObject function
 
   var getObjects = function(){
     console.log( 'in getObjects');
-    // populate the items array
-    ////// TODO: replace the stuff in this function with getting items from the database ////////
-    ////// hint: make a get call to the getInventory and use it's response data to fill the items array ////////
-  }; // end getObjects
+    $.ajax({
+      type: 'GET',
+      url: '/getInventory',
+      success: function(response){
+        for(var i=0; i<response.length; i++){
+        items.push(response[i]);
+        console.log('added to items array:', response[i]);
+        }//end for loop
+      }//end success function
+    });//end getObjects ajax
+  }; // end getObjects function
 
 
   $('#addItemButton').on('click', function(){
@@ -63,8 +67,6 @@ $( document ).ready( function(){
 
   // get objects when doc is ready
   getObjects();
-  // the below are tests to show what is returned when running findObject
-  //addObject( 'blue', 'blueberry', 'small' );
-  //findObject( 'blue', 'small' );
-  //findObject( 'blue', 'large' );
+  findObject( 'blue', 'small' );
+  findObject( 'blue', 'large' );
 }); // end doc ready

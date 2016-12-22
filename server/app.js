@@ -43,4 +43,21 @@ app.post( '/addItem', urlEncodedParser, function( req, res ){
 app.get( '/getInventory', function( req, res ){
   console.log( 'getInventory route hit' );
   // get all items in the table and return them to client
+  pg.connect(connectionString, function(err, client, done){
+    if(err){
+      console.log(err);
+    } else{
+      console.log('connected to db in getInventory');
+      var query = client.query('SELECT * from items');
+      var allItems = [];
+      query.on('row', function(row){
+        allItems.push(row);
+      });
+      query.on('end', function(){
+        done();
+        console.log(allItems);
+        res.send(allItems);
+      });
+    }
+  });//end pg connect in get
 }); // end addItem route
