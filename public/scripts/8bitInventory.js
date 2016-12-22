@@ -6,16 +6,27 @@ var colors = [ 'red', 'orange', 'yellow', 'green', 'mermaid treasure', 'blue', '
 var items = [];
 
 $( document ).ready( function(){
-  var addObject = function( addColor, addOjbect, addSize ){
+
+  var addObject = function(){
     console.log( 'in addObject' );
     // assemble object from new fields
     var newItem = {
-      color: addColor,
-      name: addObject,
-      size: addSize
-    }; // end testObject
+      name: $('#addObject').val(),
+      color: $('#addColor').val(),
+      size: $('#addSize').val()
+    }; // end newItem
     console.log( 'adding:', newItem );
-    ////// TODO: add ajax call to addItem route to add this item to the table
+    $.ajax({
+      type: 'POST',
+      url: '/addItem',
+      data: newItem,
+        success: function(response){
+          console.log('back from POST call:', response);
+        },//end success function
+        error: function(){
+          console.log('error with addItem ajax call...');
+        }//end error function
+    });//end ajax call in addObject
     // add to items array
     items.push( newItem );
   }; // end addObject
@@ -25,7 +36,7 @@ $( document ).ready( function(){
     // array of matches
     var matches = [];
     for ( var i = 0; i < items.length; i++ ) {
-      if( items[i].color == searchColor && items[i].size == sizeCheck ){
+      if( items[i].color == searchColor && items[i].size == searchSize ){
         // match, add to array
         matches.push( items[i] );
       } // end if
@@ -41,10 +52,16 @@ $( document ).ready( function(){
     ////// hint: make a get call to the getInventory and use it's response data to fill the items array ////////
   }; // end getObjects
 
+
+  $('#addItemButton').on('click', function(){
+      addObject();
+  });//end addItemButton on click function
+
+
   // get objects when doc is ready
   getObjects();
   // the below are tests to show what is returned when running findObject
-  addObject( 'blue', 'blueberry', 'small' );
-  findObject( 'blue', 'small' );
-  findObject( 'blue', 'large' );
+  //addObject( 'blue', 'blueberry', 'small' );
+  //findObject( 'blue', 'small' );
+  //findObject( 'blue', 'large' );
 }); // end doc ready

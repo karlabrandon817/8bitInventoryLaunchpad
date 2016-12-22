@@ -2,6 +2,7 @@ var express = require( 'express' );
 var app = express();
 var path = require( 'path' );
 var bodyParser = require( 'body-parser' );
+var pg = require('pg');
 var urlEncodedParser = bodyParser.urlencoded( { extended: true } );
 var port = process.env.PORT || 3003;
 
@@ -26,6 +27,16 @@ app.get( '/', function( req, res ){
 app.post( '/addItem', urlEncodedParser, function( req, res ){
   console.log( 'addItem route hit:', req.body );
   // add the item from req.body to the table
+  pg.connect(connectionString, function(err, client, done){
+    if(err){
+      console.log(err);
+    } else {
+      console.log('connected to database in post');
+      client.query('INSERT INTO items (object_name, color, size) values ($1, $2, $3)', [req.body.name, req.body.color, req.body.size]);
+      done();
+      res.send('go!');
+    }
+  });//end connection to db
 }); // end addItem route
 
 // get all objects in the inventory
