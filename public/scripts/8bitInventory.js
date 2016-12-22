@@ -55,6 +55,9 @@ $( document ).ready( function(){
 
   $('#addItemButton').on('click', function(){
       addObject();
+      $('#addObject').val('');
+      $('#addColor').val('none');
+      $('#addSize').val('none');
   });//end addItemButton on click function
 
 
