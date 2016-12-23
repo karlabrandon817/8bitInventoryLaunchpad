@@ -1,7 +1,3 @@
-// properties by which searches can be done
-var sizes = [ 'small', 'medium', 'large' ];
-var colors = [ 'red', 'orange', 'yellow', 'green', 'mermaid treasure', 'blue', 'purple' ];
-
 var items = [];//global array of items in the inventory
 
 $(document).ready(function(){
@@ -30,7 +26,7 @@ $(document).ready(function(){
   }; // end addObject function
 
   var findObject = function(array){
-    console.log( 'in findObject. Looking for:', $('#searchColor').val(), $('#searchSize').val() );
+    console.log( 'in findObject. Looking for:', $('#searchColor').val(), $('#searchSize').val());
     // array of matches
     var matches = [];
     for ( var i = 0; i < array[0].length; i++ ) {
@@ -41,6 +37,7 @@ $(document).ready(function(){
     } // end for
     console.log( 'matches:', matches );
     ////// TODO: display matches
+    displaySearchResults(matches);
   }; // end findObject function
 
   var getObjects = function(){
@@ -68,8 +65,20 @@ $(document).ready(function(){
     console.log('searching...');
   });//end searchButton onClick function
 
+  var displaySearchResults = function(array){
+    $('#outputP').html('');//clear outputP
+    if(array.length <1){
+      $('#outputP').append('<h3>' + 'There are no matches in the inventory' + '</h3>');
+    } else {
+      $('#outputP').append('<h4>Search Results:</h4>');
+      for(var i=0; i < array.length; i++ ){
+      $('#outputP').append('<p>' + array[i].size + ' ' + array[i].color + ' ' + array[i].object_name + '</p>');
+      }//end for loop
+    }//end else statement
+  };//end displaySearchResults function
+
   // get objects when doc is ready
+
   getObjects();
-  findObject( 'blue', 'small' );
-  findObject( 'blue', 'large' );
+
 }); // end doc ready
