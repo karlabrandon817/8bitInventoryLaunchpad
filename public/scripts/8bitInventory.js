@@ -9,13 +9,13 @@ $(document).ready(function(){
   });//end addItemButton on click function
 
   $('#searchButton').on('click',function(){
-    //console.log('searching...');
+  //  console.log('searching...');
     getObjects(event);
   });//end searchButton onClick function
 }); // end doc ready
 
 var addObject = function(event){
-  //console.log( 'in addObject' );
+//  console.log( 'in addObject' );
   // assemble object from new fields
   event.preventDefault();
   var newItem = {
@@ -23,16 +23,16 @@ var addObject = function(event){
     color: $('#addColor').val(),
     size: $('#addSize').val()
   }; // end newItem
-  //console.log( 'adding:', newItem );
+//  console.log( 'adding:', newItem );
   $.ajax({
     type: 'POST',
     url: '/addItem',
     data: newItem,
     success: function(response){
-    //  console.log('back from POST call:', response);
+  //    console.log('back from POST call:', response);
     },//end success function
     error: function(){
-    //  console.log('error with addItem ajax call...');
+  //    console.log('error with addItem ajax call...');
     }//end error function
   });//end ajax call in addObject
   //getObjects(event);
@@ -42,20 +42,21 @@ var findObject = function(array){
 //  console.log( 'in findObject. Looking for:', $('#searchColor').val(), $('#searchSize').val());
   // array of matches
   var matches = [];
-  for ( var i = 0; i < array[0].length; i++ ) {
-    if(array[0][i].color == $('#searchColor').val() && array[0][i].size == $('#searchSize').val()){
+  for ( var i = 0; i < items[0].length; i++ ) {
+    if(items[0][i].color == $('#searchColor').val() && items[0][i].size == $('#searchSize').val()){
       // match, add to array
-      matches.push(array[0][i]);
+      matches.push(items[0][i]);
     } // end if
   } // end for
 //  console.log( 'matches:', matches );
+  ////// TODO: display matches
   displaySearchResults(matches);
 }; // end findObject function
 
 var displaySearchResults = function(array){
   $('#outputDiv').html('');//clear outputDiv
   if(array.length <1){
-    $('#outputDiv').append('<h3>' + 'There are no matches in the inventory...' + '</h3>');
+    $('#outputDiv').append('<h3>' + 'There are no matches in the inventory' + '</h3>');
   } else {
     $('#outputDiv').append('<h4>Search Results:</h4>');
     for(var i=0; i < array.length; i++ ){
@@ -71,13 +72,9 @@ var getObjects = function(event){
     type: 'GET',
     url: '/getInventory',
     success: function(response){
-    //  console.log('added to items array from get:', response);
+  //    console.log('added to items array from get:', response);
       items.push(response);
       findObject(items);
-    },//end success function
-    error: function(){
-    //  console.log('error with GET call');
-    }//end error
+    }//end success function
   });//end getObjects ajax
 }; // end getObjects function
-// get objects when doc is ready
