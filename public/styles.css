@@ -2,13 +2,14 @@ div {
   text-align: center;
   margin: auto;
   width: 55%;
-  border: 3px solid green;
+  border: 2px solid #B0C4DE;
   padding-top: 20px;
   padding-bottom: 50px;
 }
 
 h1{
-  text-align: center
+  text-align: center;
+  font-family: Monaco, monospace;
 }
 
 #searchDiv {
@@ -18,4 +19,18 @@ h1{
 #outputDiv{
   border: none;
   margin-top: -20px;
+}
+
+h2{
+  font-family: Monaco, monospace;
+}
+
+h3, h4 {
+  font-family: Monaco, monospace;
+}
+
+#resultsDisplay{
+  font-family: Monaco, monospace;
+  font-size: 15px;
+  color: blue;
 }

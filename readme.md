@@ -11,6 +11,7 @@ Technologies
 * HTML
 * JavaScript
 * SQL
+* CSS
 
 Database
 --------
@@ -24,3 +25,5 @@ Step 1 - Complete the basic functionality using JQuery
 Step 2 - Use a server side array to store the inventory
 
 Step 3 - Add an SQL db for persistent inventory data
+
+Step 4 - Display search results on DOM
