@@ -49,8 +49,9 @@ var findObject = function(array){
     } // end if
   } // end for
   console.log( 'matches:', matches );
-  ////// TODO: display matches
   displaySearchResults(matches);
+  $('#searchColor').val('none');
+  $('#searchSize').val('none');
 }; // end findObject function
 
 var displaySearchResults = function(array){
