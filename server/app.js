@@ -23,22 +23,6 @@ app.get( '/', function( req, res ){
   res.sendFile( path.resolve( 'views/index.html' ) );
 }); // end home base
 
-// add new objects to the inventory
-app.post( '/addItem', urlEncodedParser, function( req, res ){
-  console.log( 'addItem route hit:', req.body );
-  // add the item from req.body to the table
-  pg.connect(connectionString, function(err, client, done){
-    if(err){
-      console.log(err);
-    } else {
-      console.log('connected to database in post');
-      client.query('INSERT INTO items (object_name, color, size) values ($1, $2, $3)', [req.body.name, req.body.color, req.body.size]);
-      done();
-      res.send('go!');
-    }
-  });//end connection to db
-}); // end addItem route
-
 // get all objects in the inventory
 app.get( '/getInventory', function( req, res ){
   console.log( 'getInventory route hit' );
@@ -60,4 +44,21 @@ app.get( '/getInventory', function( req, res ){
       });
     }
   });//end pg connect in get
+
+  // add new objects to the inventory
+  app.post( '/addItem', urlEncodedParser, function( req, res ){
+    console.log( 'addItem route hit:', req.body );
+    // add the item from req.body to the table
+    pg.connect(connectionString, function(err, client, done){
+      if(err){
+        console.log(err);
+      } else {
+        console.log('connected to database in post');
+        client.query('INSERT INTO items (object_name, color, size) values ($1, $2, $3)', [req.body.name, req.body.color, req.body.size]);
+        done();
+        res.send('go!');
+      }
+    });//end connection to db
+  }); // end addItem route
+
 }); // end addItem route
