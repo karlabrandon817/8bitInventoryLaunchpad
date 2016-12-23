@@ -26,16 +26,17 @@ $(document).ready(function(){
           console.log('error with addItem ajax call...');
         }//end error function
     });//end ajax call in addObject
+    getObjects();
   }; // end addObject function
 
-  var findObject = function( searchColor, searchSize ){
-    console.log( 'in findObject. Looking for:', searchColor, searchSize );
+  var findObject = function(array){
+    console.log( 'in findObject. Looking for:', $('#searchColor').val(), $('#searchSize').val() );
     // array of matches
     var matches = [];
-    for ( var i = 0; i < items.length; i++ ) {
-      if( items[i].color == searchColor && items[i].size == searchSize ){
+    for ( var i = 0; i < array[0].length; i++ ) {
+      if(array[0][i].color == $('#searchColor').val() && array[0][i].size == $('#searchSize').val()){
         // match, add to array
-        matches.push( items[i] );
+        matches.push(array[0][i]);
       } // end if
     } // end for
     console.log( 'matches:', matches );
@@ -48,10 +49,8 @@ $(document).ready(function(){
       type: 'GET',
       url: '/getInventory',
       success: function(response){
-        for(var i=0; i<response.length; i++){
-        items.push(response[i]);
-        console.log('added to items array:', response[i]);
-        }//end for loop
+        console.log('added to items array:', response);
+        items.push(response);
       }//end success function
     });//end getObjects ajax
   }; // end getObjects function
@@ -64,6 +63,10 @@ $(document).ready(function(){
       $('#addSize').val('none');
   });//end addItemButton on click function
 
+  $('#searchButton').on('click',function(){
+    findObject(items);
+    console.log('searching...');
+  });//end searchButton onClick function
 
   // get objects when doc is ready
   getObjects();
