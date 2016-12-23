@@ -1,0 +1,21 @@
+div {
+  text-align: center;
+  margin: auto;
+  width: 55%;
+  border: 3px solid green;
+  padding-top: 20px;
+  padding-bottom: 50px;
+}
+
+h1{
+  text-align: center
+}
+
+#searchDiv {
+  margin-top: 25px;
+}
+
+#outputDiv{
+  border: none;
+  margin-top: -20px;
+}

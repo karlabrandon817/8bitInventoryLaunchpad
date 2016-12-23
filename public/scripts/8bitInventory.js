@@ -55,13 +55,13 @@ var findObject = function(array){
 }; // end findObject function
 
 var displaySearchResults = function(array){
-  $('#outputP').html('');//clear outputP
+  $('#outputDiv').html('');//clear outputDiv
   if(array.length <1){
-    $('#outputP').append('<h3>' + 'There are no matches in the inventory' + '</h3>');
+    $('#outputDiv').append('<h3>' + 'There are no matches in the inventory' + '</h3>');
   } else {
-    $('#outputP').append('<h4>Search Results:</h4>');
+    $('#outputDiv').append('<h4>Search Results:</h4>');
     for(var i=0; i < array.length; i++ ){
-      $('#outputP').append('<p>' + array[i].size + ' ' + array[i].color + ' ' + array[i].object_name + '</p>');
+      $('#outputDiv').append('<p>' + array[i].size + ' ' + array[i].color + ' ' + array[i].object_name + '</p>');
     }//end for loop
   }//end else statement
 };//end displaySearchResults function
@@ -76,7 +76,10 @@ var getObjects = function(event){
       console.log('added to items array from get:', response);
       items.push(response);
       findObject(items);
-    }//end success function
+    },//end success function
+    error: function(){
+      console.log('error with GET call');
+    }//end error
   });//end getObjects ajax
 }; // end getObjects function
 // get objects when doc is ready

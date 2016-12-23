@@ -2,13 +2,14 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>8-Bit Inventory Launchpad</title>
+    <title>Inventory</title>
     <script src="vendors/jquery.min.js" charset="utf-8"></script>
     <script src="scripts/8bitInventory.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <h1>8-Bit Inventory Launchpad</h1>
-    <div>
+    <h1>Inventory Launchpad</h1>
+    <div id='addDiv'>
       <h2>Add Item to Inventory</h2>
       <input type="text" id='addObject' placeholder="object name"/>
       <select id='addColor'>
@@ -29,7 +30,7 @@
       </select>
           <button type="button" name="button" id="addItemButton">Add to Inventory</button>
     </div>
-    <div>
+    <div id='searchDiv'>
       <h2>Search for Item</h2>
       <select id='searchColor'>
           <option value='none'>Select A Color</option>
@@ -48,7 +49,7 @@
         <option value='large'>Large</option>
       </select>
       <button type="button" name="button" id="searchButton">Search Inventory</button>
-      <p id='outputP'></p>
     </div>
+    <div id='outputDiv'></div>
   </body>
 </html>
