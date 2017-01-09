@@ -42,10 +42,10 @@ var findObject = function(array) {
     //  console.log( 'in findObject. Looking for:', $('#searchColor').val(), $('#searchSize').val());
     // array of matches
     var matches = [];
-    for (var i = 0; i < items[0].length; i++) {
-        if (items[0][i].color == $('#searchColor').val() && items[0][i].size == $('#searchSize').val()) {
+    for (var i = 0; i < items.length; i++) {
+        if (items[i].color == $('#searchColor').val() && items[i].size == $('#searchSize').val()) {
             // match, add to array
-            matches.push(items[0][i]);
+            matches.push(items[i]);
         } // end if
     } // end for
     //console.log( 'matches:', matches );
@@ -74,7 +74,9 @@ var getObjects = function(event) {
         url: '/getInventory',
         success: function(response) {
             //    console.log('added to items array from get:', response);
-            items.push(response);
+            for (var i = 0; i < response.length; i++) {
+                items.push(response[i]);
+            }
             findObject(items);
         } //end success function
     }); //end getObjects ajax
